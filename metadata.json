@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix Petualangan Pulau Pelangi - Game Teks Eksplanasi Kelas 6 SD",
+  "description": "Game edukasi interaktif Bahasa Indonesia Kelas VI SD bertema peta petualangan pulau untuk memahami struktur teks eksplanasi pada proses terjadinya pelangi dengan panduan suara interaktif.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
