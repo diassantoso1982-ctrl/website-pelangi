@@ -17,7 +17,11 @@ import {
   HelpCircle,
 } from 'lucide-react';
 
-const DIAGRAM_IMG = '/src/assets/images/droplet_dispersion_diagram_1791879180051.jpg';
+import {
+  DROPLET_DIAGRAM_IMAGE_SRC,
+  FALLBACK_DIAGRAM,
+  onImageErrorWithFallback,
+} from '../assets/images';
 
 interface GameStationModalProps {
   station: GameStation;
@@ -489,9 +493,11 @@ export const GameStationModal: React.FC<GameStationModalProps> = ({
                     {/* Diagram Illustration */}
                     <div className="rounded-xl overflow-hidden border border-slate-700 bg-slate-950 aspect-[4/3]">
                       <img
-                        src={DIAGRAM_IMG}
+                        src={DROPLET_DIAGRAM_IMAGE_SRC}
                         alt="Diagram Pemantulan Internal Pelangi"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover select-none"
+                        loading="eager"
+                        onError={(e) => onImageErrorWithFallback(e, FALLBACK_DIAGRAM)}
                       />
                     </div>
 

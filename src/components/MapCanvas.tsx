@@ -3,9 +3,13 @@ import { GameStation, GameStationId } from '../types/game';
 import { Lock, Check, Star, Sparkles, Navigation } from 'lucide-react';
 import { audio } from '../utils/audio';
 
-// Island Map Image
-const MAP_BG = '/src/assets/images/island_adventure_map_1791879178703.jpg';
-const MASCOT_IMG = '/src/assets/images/captain_spectra_mascot_1791879179604.jpg';
+import {
+  MASCOT_IMAGE_SRC,
+  MAP_BG_IMAGE_SRC,
+  FALLBACK_MASCOT,
+  FALLBACK_MAP,
+  onImageErrorWithFallback,
+} from '../assets/images';
 
 interface MapCanvasProps {
   stations: GameStation[];
@@ -49,9 +53,11 @@ export const MapCanvas: React.FC<MapCanvasProps> = ({
     <div className="relative w-full aspect-[16/9] max-h-[82vh] rounded-3xl overflow-hidden shadow-2xl border-4 border-amber-400/80 bg-slate-950 select-none">
       {/* Map Background Artwork */}
       <img
-        src={MAP_BG}
+        src={MAP_BG_IMAGE_SRC}
         alt="Peta Petualangan Pulau Pelangi - Bahasa Indonesia Kelas 6 SD"
         className="w-full h-full object-cover object-center pointer-events-none"
+        loading="eager"
+        onError={(e) => onImageErrorWithFallback(e, FALLBACK_MAP)}
       />
 
       {/* Atmospheric Overlays: Soft sunray & cloud shading */}
@@ -136,9 +142,11 @@ export const MapCanvas: React.FC<MapCanvasProps> = ({
             {/* Animated Pin Marker */}
             <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full border-2 border-white shadow-2xl overflow-hidden bg-amber-400 ring-4 ring-amber-300 animate-bounce">
               <img
-                src={MASCOT_IMG}
+                src={MASCOT_IMAGE_SRC}
                 alt="Pion Petualang Kapten Spektra"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover select-none"
+                loading="eager"
+                onError={(e) => onImageErrorWithFallback(e, FALLBACK_MASCOT)}
               />
             </div>
             <div className="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[10px] border-t-amber-400 -mt-1 drop-shadow-md"></div>

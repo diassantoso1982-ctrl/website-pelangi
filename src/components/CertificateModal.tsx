@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { Trophy, Star, Printer, X, Award, CheckCircle2, Sparkles, HardDrive } from 'lucide-react';
 import { audio } from '../utils/audio';
 
-const MASCOT_IMG = '/src/assets/images/captain_spectra_mascot_1791879179604.jpg';
+import {
+  MASCOT_IMAGE_SRC,
+  FALLBACK_MASCOT,
+  onImageErrorWithFallback,
+} from '../assets/images';
 
 interface CertificateModalProps {
   studentName: string;
@@ -203,8 +207,14 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                 <span className="block text-[11px]">Pemandu Petualangan:</span>
                 <span className="font-bold text-amber-300 print:text-amber-700 font-['Fredoka']">Kapten Spektra</span>
                 <div className="h-10 flex items-center justify-center">
-                  <div className="w-9 h-9 rounded-full overflow-hidden border border-amber-400 shadow-sm">
-                    <img src={MASCOT_IMG} alt="Kapten Spektra" className="w-full h-full object-cover" />
+                  <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-amber-400 shadow-sm bg-amber-100">
+                    <img
+                      src={MASCOT_IMAGE_SRC}
+                      alt="Kapten Spektra"
+                      className="w-full h-full object-cover select-none"
+                      loading="eager"
+                      onError={(e) => onImageErrorWithFallback(e, FALLBACK_MASCOT)}
+                    />
                   </div>
                 </div>
                 <span className="block border-t border-slate-700 pt-1 font-semibold text-[11px]">

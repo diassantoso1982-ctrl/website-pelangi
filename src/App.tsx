@@ -23,8 +23,13 @@ import {
   HardDrive,
 } from 'lucide-react';
 
-const MASCOT_IMG = '/src/assets/images/captain_spectra_mascot_1791879179604.jpg';
-const MAP_BG = '/src/assets/images/island_adventure_map_1791879178703.jpg';
+import {
+  MASCOT_IMAGE_SRC,
+  MAP_BG_IMAGE_SRC,
+  FALLBACK_MASCOT,
+  FALLBACK_MAP,
+  onImageErrorWithFallback,
+} from './assets/images';
 
 const LOCAL_STORAGE_KEY = 'pulau_pelangi_game_progress_v1';
 
@@ -196,16 +201,24 @@ export default function App() {
           <div className="relative rounded-3xl overflow-hidden border-2 border-amber-400/80 shadow-2xl bg-gradient-to-br from-slate-900 via-sky-950 to-slate-950 p-6 sm:p-10 my-auto flex flex-col md:flex-row items-center gap-8">
             {/* Background art blur */}
             <div className="absolute inset-0 opacity-15 pointer-events-none">
-              <img src={MAP_BG} alt="Pulau Pelangi" className="w-full h-full object-cover" />
+              <img
+                src={MAP_BG_IMAGE_SRC}
+                alt="Pulau Pelangi"
+                className="w-full h-full object-cover"
+                loading="eager"
+                onError={(e) => onImageErrorWithFallback(e, FALLBACK_MAP)}
+              />
             </div>
 
             {/* Mascot Avatar Card */}
             <div className="relative z-10 shrink-0 flex flex-col items-center">
               <div className="w-36 h-36 sm:w-48 sm:h-48 rounded-3xl overflow-hidden border-4 border-amber-400 shadow-2xl bg-amber-100 ring-8 ring-amber-300/30">
                 <img
-                  src={MASCOT_IMG}
+                  src={MASCOT_IMAGE_SRC}
                   alt="Kapten Spektra"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover select-none"
+                  loading="eager"
+                  onError={(e) => onImageErrorWithFallback(e, FALLBACK_MASCOT)}
                 />
               </div>
               <div className="mt-3 px-3 py-1 rounded-full bg-amber-400 text-slate-950 text-xs font-black shadow-md font-['Fredoka']">

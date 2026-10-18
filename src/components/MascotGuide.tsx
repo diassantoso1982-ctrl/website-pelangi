@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Volume2, VolumeX, Sparkles } from 'lucide-react';
 import { audio } from '../utils/audio';
 
-// Generated Mascot image
-const MASCOT_IMG = '/src/assets/images/captain_spectra_mascot_1791879179604.jpg';
+import {
+  MASCOT_IMAGE_SRC,
+  FALLBACK_MASCOT,
+  onImageErrorWithFallback,
+} from '../assets/images';
 
 interface MascotGuideProps {
   currentText: string;
@@ -64,9 +67,11 @@ export const MascotGuide: React.FC<MascotGuideProps> = ({
           }`}
         >
           <img
-            src={MASCOT_IMG}
+            src={MASCOT_IMAGE_SRC}
             alt="Kapten Spektra - Pemandu Petualangan"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover select-none"
+            loading="eager"
+            onError={(e) => onImageErrorWithFallback(e, FALLBACK_MASCOT)}
           />
         </div>
 
